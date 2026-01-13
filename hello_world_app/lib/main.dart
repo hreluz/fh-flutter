@@ -5,12 +5,15 @@ void main(List<String> args) {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Center(child: Text('Hello word')),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(child: Text('Hello world'))
+      ),
     );
   }
-  
-
 }
