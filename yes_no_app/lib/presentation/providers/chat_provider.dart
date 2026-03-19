@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/config/helpers/get_yes_no_answer.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
 
 class ChatProvider extends ChangeNotifier {
+  final getYesNoAnswer = GetYesNoAnswer();
   final ScrollController chatScrollController = ScrollController();
 
   List<Message> messageList = [
@@ -13,6 +15,18 @@ class ChatProvider extends ChangeNotifier {
     if (text.isEmpty) return;
     final newMessage = Message(text: text, fromWho: FromWho.me);
     messageList.add(newMessage);
+
+    if (text.endsWith('?')) {
+      userReply();
+    }
+
+    notifyListeners();
+    moveScrollToBottom();
+  }
+
+  Future<void> userReply() async {
+    final userMessage = await getYesNoAnswer.getAnswer();
+    messageList.add(userMessage);
     notifyListeners();
     moveScrollToBottom();
   }
