@@ -4,3 +4,8 @@ For Mappers
 quicktype.io
 
 
+
+Open ios Simulator
+---------------------
+open -a Simulator
+
